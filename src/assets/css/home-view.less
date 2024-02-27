@@ -1,0 +1,45 @@
+.home {
+    display: flex;
+    height: 100%;
+
+    .menu-list {
+        .ant-menu {
+            height: 100%;
+        }
+    }
+
+    .main-app {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s;
+
+        .main-header {
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding: 0 20px 0 10px;
+
+            .header-left {
+                display: flex;
+                align-items: center;
+
+                .fold-btn {
+                    margin: 0 !important;
+                }
+
+                .breadcrumb {
+                    margin-left: 20px;
+                }
+            }
+
+            .header-right {
+                display: flex;
+                align-items: center;
+            }
+
+        }
+
+    }
+}
