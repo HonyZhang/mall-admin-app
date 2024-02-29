@@ -10,6 +10,7 @@ export default new Vuex.Store({
     collapsed: false,
     // 用户信息
     user: getUserCookie(),
+    menuRoutes: [],
   },
   getters: {
   },
@@ -28,6 +29,9 @@ export default new Vuex.Store({
         email: '',
       };
     },
+    changeMenuRoutes(state, menuRoutes) {
+      state.menuRoutes = menuRoutes;
+    },
   },
   actions: {
     changeCollapsed({ commit }) {
@@ -40,6 +44,9 @@ export default new Vuex.Store({
     logout({ commit }) {
       commit('logout');
       removeUserCookie();
+    },
+    changeMenuRoutes({ commit }, menuRoutes) {
+      commit('changeMenuRoutes', menuRoutes);
     },
   },
   modules: {

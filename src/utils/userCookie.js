@@ -19,7 +19,7 @@ export function setUserCookie(info) {
  */
 export function getUserCookie() {
   return {
-    userName: Cookies.get('username'),
+    username: Cookies.get('username'),
     appkey: Cookies.get('appkey'),
     role: Cookies.get('role'),
     email: Cookies.get('email'),
