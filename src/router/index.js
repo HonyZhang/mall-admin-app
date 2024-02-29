@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '@/store';
 import HomeView from '../views/layout/HomeView.vue';
 import LoginView from '../views/layout/LoginView.vue';
 
@@ -28,6 +29,16 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login') {
+    if (store.state.user.appkey && store.state.user.username && store.state.user.role) {
+      return next();
+    }
+    return next('/login');
+  }
+  return next();
 });
 
 export default router;

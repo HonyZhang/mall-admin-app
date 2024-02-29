@@ -20,7 +20,7 @@
         </a>
         <a-menu slot="overlay">
           <a-menu-item>
-            <a @click="userExit" @keyup.enter="userExit">退出</a>
+            <a @click="logout" @keyup.enter="logout">退出</a>
           </a-menu-item>
         </a-menu>
       </a-dropdown>
@@ -34,7 +34,7 @@ export default {
     toggleCollapsed() {
       this.$store.dispatch('changeCollapsed');
     },
-    userExit(e) {
+    logout(e) {
       e.preventDefault();
       this.$store.dispatch('logout');
       this.$router.push({ name: 'login' });
