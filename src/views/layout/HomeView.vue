@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <LeftMenu></LeftMenu>
-    <div :class="{ 'main-app': true, 'menu-unfold': $store.state.collapsed }">
+    <div class="main-app">
       <SlideNav></SlideNav>
       <router-view></router-view>
     </div>

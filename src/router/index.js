@@ -13,6 +13,8 @@ const asyncRouterMap = [{
   component: HomeView,
   meta: {
     title: '商品',
+    icon: 'inbox',
+    hidden: false,
   },
   children: [
     {
@@ -21,6 +23,8 @@ const asyncRouterMap = [{
       component: () => import('@/views/page/ProductList.vue'),
       meta: {
         title: '商品列表',
+        icon: 'unordered-list',
+        hidden: false,
       },
     },
     {
@@ -29,6 +33,8 @@ const asyncRouterMap = [{
       component: () => import('@/views/page/ProductAdd.vue'),
       meta: {
         title: '添加商品',
+        icon: 'file-add',
+        hidden: false,
       },
     },
     {
@@ -37,6 +43,8 @@ const asyncRouterMap = [{
       component: () => import('@/views/page/ProductCategory.vue'),
       meta: {
         title: '商品种类',
+        icon: 'database',
+        hidden: false,
       },
     },
   ],
@@ -49,6 +57,8 @@ const routes = [
     component: HomeView,
     meta: {
       title: '首页',
+      icon: 'home',
+      hidden: false,
     },
     children: [
       {
@@ -57,6 +67,8 @@ const routes = [
         component: () => import('@/views/page/IndexView.vue'),
         meta: {
           title: '统计',
+          icon: 'number',
+          hidden: false,
         },
       },
     ],
@@ -67,6 +79,7 @@ const routes = [
     component: LoginView,
     meta: {
       title: '登录',
+      hidden: true,
     },
   },
 ];
@@ -75,16 +88,15 @@ const router = new VueRouter({
   routes,
 });
 
-let isAddRoutes = false;
+if (store.state.user.appkey && store.state.user.username && store.state.user.role) {
+  const menuRoutes = getMenuRoutes(store.state.user.role, asyncRouterMap);
+  router.addRoutes(menuRoutes);
+  store.dispatch('changeMenuRoutes', routes.concat(menuRoutes));
+}
+
 router.beforeEach((to, from, next) => {
   if (to.path !== '/login') {
     if (store.state.user.appkey && store.state.user.username && store.state.user.role) {
-      if (!isAddRoutes) {
-        const menuRoutes = getMenuRoutes(store.state.user.role, asyncRouterMap);
-        router.addRoutes(menuRoutes);
-        store.dispatch('changeMenuRoutes', routes.concat(menuRoutes));
-        isAddRoutes = true;
-      }
       return next();
     }
     return next('/login');
